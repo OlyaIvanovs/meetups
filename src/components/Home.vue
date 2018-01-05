@@ -32,10 +32,11 @@
     export default {
         data() {
             return {
-                meetups: [
-                    { imageUrl: 'https://media.timeout.com/images/103444978/image.jpg', id: 'jjhjhj', title: 'Meetup in New York' },
-                    { imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Auckland_Skyline_as_seen_from_Devonport_20100128_3.jpg/1200px-Auckland_Skyline_as_seen_from_Devonport_20100128_3.jpg', id: 'asasasasjjhjhj', title: 'Meetup in Auckland' },
-                ]
+            }
+        },
+        computed: {
+            meetups ()  {
+                return this.$store.getters.featuredMeetups
             }
         },
         methods: {

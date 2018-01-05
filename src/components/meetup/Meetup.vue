@@ -4,21 +4,14 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <h3 class="green--text text--darken-1">My meetup</h3>
+                        <h3 class="green--text text--darken-1">{{ meetup.title}}</h3>
                     </v-card-title>
                     <v-card-media
-                        src="https://media.timeout.com/images/103444978/image.jpg"
+                        :src="meetup.imageUrl"
                         height="325px"
                     ></v-card-media>
                     <v-card-text>
-                        <div class="green--text text--darken-1">17 July 2017</div>
-                        <div>
-                            he range of elements processed 
-                        by forEach() is set before the first invocation of 
-                        callback. Elements that are appended to the array 
-                        after the call to forEach() begins will not be visited
-                         by callback. If the values of existing elements of the
-                        </div>
+                        <div class="green--text text--darken-1">{{ meetup.date }}</div>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -32,7 +25,16 @@
   
 <script>
 export default {
-  
+    data () {
+        return {
+        }
+    },
+    props: ['id'],
+    computed: {
+        meetup() {
+            return this.$store.getters.loadedMeetup(this.id)
+        }
+    }
 }
 </script>
 
