@@ -1,17 +1,19 @@
 <template>
     <v-container>
-        <v-layout row wrap>
+        <v-layout row wrap mt-2>
             <v-flex xs12>
                 <v-card>
                     <v-card-title>
-                        <h3 class="green--text text--darken-1">{{ meetup.title}}</h3>
+                        <h2 class="green--text text--darken-1">{{ meetup.title }}</h2>
                     </v-card-title>
                     <v-card-media
                         :src="meetup.imageUrl"
                         height="325px"
                     ></v-card-media>
                     <v-card-text>
-                        <div class="green--text text--darken-1">{{ meetup.date }}</div>
+                        <div class="green--text text--darken-1">{{ meetup.date | date }}</div>
+                        <div class="green--text text--darken-1">{{ meetup.location}}</div>
+                        <div>{{ meetup.description }}</div>
                     </v-card-text>
                     <v-card-actions>
                         <v-spacer></v-spacer>
