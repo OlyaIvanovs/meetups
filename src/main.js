@@ -7,7 +7,9 @@ import App from './App'
 import * as firebase from 'firebase'
 import router from './router'
 import { store } from './store'
-import DateFilter from  './filters/date'
+import DateFilter from './filters/date'
+
+import AlertCmp from './components/shared/Alert.vue'
 
 Vue.use(Vuetify, { theme: {
   primary: '#7cb342',
@@ -20,6 +22,7 @@ Vue.use(Vuetify, { theme: {
 }})
 
 Vue.filter('date', DateFilter)
+Vue.component('app-alert', AlertCmp)
 
 Vue.config.productionTip = false
 
@@ -27,7 +30,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
-  store, 
+  store,
   render: h => h(App),
   created () {
     firebase.initializeApp({

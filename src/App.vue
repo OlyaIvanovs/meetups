@@ -10,7 +10,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat dark v-for="item in menuItems" :to='item.link'>
+        <v-btn flat dark v-for="item in menuItems" :key="item.id" :to='item.link'>
           <v-icon left>{{ item.icon }}</v-icon> 
           {{ item.title }}
         </v-btn>
@@ -21,7 +21,7 @@
     </main> 
     <v-navigation-drawer temporary v-model="sideNav">
       <v-list>
-        <v-list-tile v-for="item in menuItems" :to='item.link'>
+        <v-list-tile v-for="item in menuItems" :key="item.id" :to='item.link'>
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-tile-action>
@@ -61,3 +61,42 @@
     }
   }
 </script>
+
+<style>
+  .custom-loader {
+    animation: loader 1s infinite;
+    display: flex;
+  }
+  @-moz-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-webkit-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @-o-keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes loader {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+</style>
