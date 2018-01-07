@@ -128,7 +128,7 @@
             createMeetup () {
                 const meetupData = {
                     title: this.meetup.title,
-                    loation: this.meetup.location,
+                    location: this.meetup.location,
                     imageUrl: this.meetup.imageUrl,
                     description: this.meetup.description,
                     date: this.submittableDateTime

@@ -21,7 +21,8 @@ export const store = new Vuex.Store({
         ],
         user: null,
         loading: false,
-        error: null
+        error: null,
+        loadedMeetups: []
     },
     mutations: {
         createMeetup (state, payload) {
@@ -38,19 +39,54 @@ export const store = new Vuex.Store({
         },
         clearError (state, payload) {
             state.error = null
+        },
+        setLoadedMeetups (state, payload) {
+            console.log(payload)
+            console.log('gjkdfjgkj')
+            state.loadedMeetups = payload
         }
     },
     actions: {
+        loadMeetups ({commit}) {
+            commit('setLoading', true)
+            firebase.database().ref('meetups').once('value').then((data) => {
+                const meetups = []
+                const obj = data.val()
+                for (let key in obj) {
+                    meetups.push({
+                        id: key,
+                        title: obj[key].title,
+                        location: obj[key].location,
+                        description: obj[key].description,
+                        date: obj[key].date,
+                        imageUrl: obj[key].imageUrl
+                    })
+                }
+                commit('setLoadedMeetups', meetups)
+                commit('setLoading', false)
+            }).catch((error) => {
+                    console.log(error)
+                    commit('setLoading', true)
+                }
+            )
+        },
         createMeetup ({commit}, payload) {
             const meetup = {
                 title: payload.title,
                 location: payload.location,
                 imageUrl: payload.imageUrl,
                 description: payload.description,
-                date: payload.date,
-                id: 'djgkldjfglkjdfklgjkldfjglk'
+                date: payload.date.toISOString()
             }
-            commit('createMeetup', meetup)
+            firebase.database().ref('meetups').push(meetup).then(
+                (data) => {
+                    const key = data.key
+                    commit('createMeetup', {
+                        ...meetup,
+                        id: key
+                    })
+                }
+            ).catch((error) => console.log(error))
         },
         signUserUp ({commit}, payload) {
             commit('setLoading', true)
