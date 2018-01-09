@@ -32,13 +32,14 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs12 sm8>
-                            <v-text-field
-                                name="imageUrl"
-                                label="ImageURL"
-                                id="image-url"
-                                v-model="meetup.imageUrl"
-                                required
-                            ></v-text-field>
+                            <v-btn class="green darken-2" dark raised @click="onPickFile">
+                                Upload Image
+                            </v-btn>
+                            <input type="file" 
+                                style="display: none;"
+                                ref="fileInput" 
+                                @change="onFilePicked"
+                                accept="image/*">
                         </v-flex>
                     </v-layout>
                     <v-layout row>
@@ -96,7 +97,8 @@
                     imageUrl: '',
                     description: '',
                     date: '',
-                    time: new Date()
+                    time: new Date(),
+                    image: null
                 }
             }
         },
@@ -125,13 +127,36 @@
             }
         },
         methods: {
+            onPickFile () {
+                this.$refs.fileInput.click()
+            },
+            onFilePicked (event) {
+                const files = event.target.files
+                let filename = files[0].name
+                if (filename.lastIndexOf('.') <= 0) {
+                    return alert('Please add a valid file!')
+                }
+                const fileReader = new FileReader()
+                fileReader.addEventListener('load', () => {
+                    this.meetup.imageUrl = fileReader.result
+                })
+                fileReader.readAsDataURL(files[0])
+                this.meetup.image = files[0]
+            },
             createMeetup () {
+                if (!this.formIsValid) {
+                    return
+                }
+                if (!this.meetup.image) {
+                    return
+                }
                 const meetupData = {
                     title: this.meetup.title,
                     location: this.meetup.location,
                     imageUrl: this.meetup.imageUrl,
                     description: this.meetup.description,
-                    date: this.submittableDateTime
+                    date: this.submittableDateTime,
+                    image: this.meetup.image
                 }
                 this.$store.dispatch('createMeetup', meetupData)
                 this.$router.push({name: 'Meetups'})
