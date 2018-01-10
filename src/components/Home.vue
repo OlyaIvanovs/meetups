@@ -8,7 +8,7 @@
                 <v-btn large router to="/meetup/new" class="green darken-2" dark>Organize Meetup</v-btn>
             </v-flex>
         </v-layout>
-        <v-layout row>
+        <v-layout row wrap>
             <v-flex xs12 class="text-xs-center">
                 <v-progress-circular 
                 :width="7"
