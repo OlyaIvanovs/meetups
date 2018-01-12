@@ -1,5 +1,4 @@
 import Vue from 'vue'
-
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.css'
 
@@ -40,12 +39,13 @@ new Vue({
   store,
   render: h => h(App),
   created () {
+    console.log('gkjsdjgksjdk')
     firebase.initializeApp({
       apiKey: 'AIzaSyCjXtcTTu67IIfUCnsDDfCrh44XPb9llAk',
       authDomain: 'meetups-bfd68.firebaseapp.com',
       databaseURL: 'https://meetups-bfd68.firebaseio.com',
       projectId: 'meetups-bfd68',
-      storageBucket: 'gs://meetups-bfd68.appspot.com'
+      storageBucket: 'meetups-bfd68.appspot.com'
     })
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {

@@ -25,6 +25,10 @@ export default {
         }
     },
     actions: {
+        logout ({commit}) {
+            firebase.auth().signOut()
+            commit('setUser', null)
+        },
         registerUserForMeetup ({commit, getters}, payload) {
             commit('setLoading', true)
             const user = getters.user
