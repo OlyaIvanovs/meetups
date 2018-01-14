@@ -44,6 +44,7 @@
                                         v-model="confirmPassword"
                                         type="password"
                                         :rules="[comparePasswords]"
+                                        required
                                         ></v-text-field>
                                     </v-flex>
                                 </v-layout>
